@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +16,7 @@ import com.github.vitorhla.dscatalog.dto.CategoryDTO;
 import com.github.vitorhla.dscatalog.entities.Category;
 import com.github.vitorhla.dscatalog.repositories.CategoryRepository;
 import com.github.vitorhla.dscatalog.services.exceptions.ControllerNotFoundException;
+import com.github.vitorhla.dscatalog.services.exceptions.DatabaseException;
 
 @Service
 public class CategoryService {
@@ -60,6 +63,20 @@ public class CategoryService {
 		catch(EntityNotFoundException e) {
 			
 			throw new ControllerNotFoundException("Id not found" + id);
+		}
+		
+	}
+
+	public void delete(Long id) {
+		try {
+		categoryRepository.deleteById(id);
+		}
+		catch (EmptyResultDataAccessException e ) {
+			throw new ControllerNotFoundException("Id not found" + id);
+		}
+		catch (DataIntegrityViolationException e ) {
+			throw new DatabaseException("Integrity violation");
+			
 		}
 		
 	}
