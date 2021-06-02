@@ -9,14 +9,16 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.vitorhla.dscatalog.dto.CategoryDTO;
+import com.github.vitorhla.dscatalog.dto.RoleDTO;
 import com.github.vitorhla.dscatalog.dto.UserDTO;
-import com.github.vitorhla.dscatalog.entities.Category;
+import com.github.vitorhla.dscatalog.dto.UserInsertDTO;
+import com.github.vitorhla.dscatalog.entities.Role;
 import com.github.vitorhla.dscatalog.entities.User;
-import com.github.vitorhla.dscatalog.repositories.CategoryRepository;
+import com.github.vitorhla.dscatalog.repositories.RoleRepository;
 import com.github.vitorhla.dscatalog.repositories.UserRepository;
 import com.github.vitorhla.dscatalog.services.exceptions.ControllerNotFoundException;
 import com.github.vitorhla.dscatalog.services.exceptions.DatabaseException;
@@ -25,10 +27,13 @@ import com.github.vitorhla.dscatalog.services.exceptions.DatabaseException;
 public class UserService {
 	
 	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private UserRepository repository;
 	
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private RoleRepository roleRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(Pageable pageable){
@@ -41,14 +46,15 @@ public class UserService {
 	public UserDTO findById(Long id) {
 		Optional<User>  obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ControllerNotFoundException("Entity not found"));
-		return new UserDTO(entity,entity.getCategories());
+		return new UserDTO(entity);
 		
 	}
 
 	@Transactional
-	public UserDTO insert(UserDTO dto) {
+	public UserDTO insert(UserInsertDTO dto) {
 		User entity =  new User();
 		copyDtoToEntity(dto,entity);
+		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
@@ -84,17 +90,15 @@ public class UserService {
 	}
 	
 	private void copyDtoToEntity(UserDTO dto, User entity) {
-		entity.setName(dto.getName());
-		entity.setDescription(dto.getDescription());
-		entity.setDate(dto.getDate());
-		entity.setImgUrl(dto.getImgUrl());
-		entity.setPrice(dto.getPrice());
+		entity.setFirstName(dto.getFirstName());
+		entity.setLastName(dto.getLastName());	
+		entity.setEmail(dto.getEmail());
 		
-		entity.getCategories().clear();
+		entity.getRoles().clear();
 		
-		for(CategoryDTO catDto : dto.getCategories()) {
-			Category category = categoryRepository.getOne(catDto.getId());
-			entity.getCategories().add(category);
+		for(RoleDTO roleDto : dto.getRoles()) {
+			Role role = roleRepository.getOne(roleDto.getId());
+			entity.getRoles().add(role);
 		}
 		
 	}

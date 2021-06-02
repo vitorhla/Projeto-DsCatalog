@@ -31,6 +31,8 @@ public class UserDTO {
 		firstName = entity.getFirstName();
 		lastName = entity.getLastName();
 		email = entity.getEmail();
+		entity.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
+		
 		
 	}
 

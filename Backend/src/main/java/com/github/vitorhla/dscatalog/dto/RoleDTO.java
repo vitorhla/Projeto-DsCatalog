@@ -2,6 +2,8 @@ package com.github.vitorhla.dscatalog.dto;
 
 import java.io.Serializable;
 
+import com.github.vitorhla.dscatalog.entities.Role;
+
 public class RoleDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -18,6 +20,11 @@ public class RoleDTO implements Serializable{
 		this.authority = authority;
 	}
 
+	public RoleDTO(Role role) {
+		id = role.getId();
+		authority = role.getAuthority();
+	}
+	
 	public Long getId() {
 		return id;
 	}
