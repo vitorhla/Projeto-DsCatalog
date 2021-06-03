@@ -12,5 +12,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/**");
+		//liberando todos os acessos no spring configure
 	}
 }
