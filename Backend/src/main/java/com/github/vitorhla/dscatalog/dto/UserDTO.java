@@ -3,12 +3,17 @@ package com.github.vitorhla.dscatalog.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.github.vitorhla.dscatalog.entities.User;
 
 public class UserDTO {
 	private Long id;
+	@NotBlank(message = "Campo obrigatório")
 	private String firstName;
 	private String lastName;
+	@Email(message = "Favor entrar um email válido")
 	private String email;
 	
 	Set<RoleDTO> roles =  new HashSet<>();
