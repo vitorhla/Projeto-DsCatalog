@@ -1,5 +1,8 @@
 package com.github.vitorhla.dscatalog.dto;
 
+import com.github.vitorhla.dscatalog.services.validation.UserInsertValid;
+
+@UserInsertValid
 public class UserInsertDTO extends UserDTO{
 	private static final long serialVersionUID =1L;
 	
