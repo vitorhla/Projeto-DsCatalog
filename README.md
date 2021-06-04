@@ -1,5 +1,5 @@
 # Recursos para back end
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/vitorhla/Project-DsVendas/blob/master/LICENSE)
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/vitorhla/Projeto-DsCatalog/blob/master/LICENSE)
 ## Dependências Maven
 
 ### Pegue o pom.xml completo para Spring Boot versão 2.4.2 no link abaixo:
