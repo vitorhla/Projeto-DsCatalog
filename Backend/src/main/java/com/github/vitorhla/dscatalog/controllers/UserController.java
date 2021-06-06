@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.github.vitorhla.dscatalog.dto.UserDTO;
 import com.github.vitorhla.dscatalog.dto.UserInsertDTO;
+import com.github.vitorhla.dscatalog.dto.UserUpdateDTO;
 import com.github.vitorhla.dscatalog.services.UserService;
 
 @RestController
@@ -52,11 +53,10 @@ public class UserController {
 		return ResponseEntity.created(uri).body(newDto);	
 	}
 	
-	@PutMapping(value =  "/{id}")
-	public ResponseEntity <UserDTO> update(@Valid @PathVariable Long id, @RequestBody UserDTO dto){
-		dto = service.update(id,dto);
-		return ResponseEntity.ok().body(dto);
-		
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
+		UserDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
 	}
 	
 	@DeleteMapping(value =  "/{id}")
