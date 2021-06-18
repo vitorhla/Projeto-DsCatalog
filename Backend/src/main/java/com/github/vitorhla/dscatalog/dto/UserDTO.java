@@ -23,6 +23,7 @@ public class UserDTO {
 		
 	}
 
+	
 	public UserDTO(Long id, String firstName, String lastName, String email) {
 		this.id = id;
 		this.firstName = firstName;
@@ -77,5 +78,5 @@ public class UserDTO {
 		return roles;
 	}
 		
-	
+
 }
