@@ -35,6 +35,7 @@ public class ProductDTO implements Serializable{
 	public ProductDTO() {
 		
 	}
+	
 
 	public ProductDTO(Long id, String name, String description, Double price, String imgUrl, Instant date) {
 		this.id = id;
@@ -43,6 +44,7 @@ public class ProductDTO implements Serializable{
 		this.price = price;
 		this.imgUrl = imgUrl;
 		this.date = date;
+		
 	}
 	
 	public ProductDTO(Product entity) {

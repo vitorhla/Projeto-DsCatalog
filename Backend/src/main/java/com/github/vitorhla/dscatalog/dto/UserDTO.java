@@ -24,11 +24,13 @@ public class UserDTO {
 	}
 
 	
+	
 	public UserDTO(Long id, String firstName, String lastName, String email) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		
 		
 	}
 	
