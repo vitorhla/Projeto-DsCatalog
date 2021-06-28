@@ -21,18 +21,12 @@ public class ProductRepositoryTests {
 	private long nonExistingId;
 	private long countTotalProjects;
 	
-	
-	
 	@BeforeEach
 	void setUp() throws Exception{
 		existingId = 1L;
 		nonExistingId = 1000L;
 		countTotalProjects = 25L;
 	}
-	
-	
-	
-	
 	
 	@Test
 	public void saveShouldPersistWithAutoincrementWhenIdIsNull() {
@@ -44,7 +38,6 @@ public class ProductRepositoryTests {
 		Assertions.assertEquals(countTotalProjects+1, product.getId());
 		
 	}
-	
 	
 	@Test
 	public void deletShouldDeleteObjectWhenIdExists() {
@@ -64,9 +57,5 @@ public class ProductRepositoryTests {
 			
 		});
 	}
-	
-	
-	
-	
-	
+
 }
