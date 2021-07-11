@@ -1,10 +1,15 @@
 import './assets/styles/custom.scss';
 import './App.css';
+import Navbar from './components/Navbar';
 
-function App() {
+const  App = () => {
   return (
-   <h1>Ola DSCatalog</h1>
+  <>
+  <Navbar/>
+  <h1>Ola DSCatalog</h1>;
+  </>
   );
+
 }
 
 export default App;

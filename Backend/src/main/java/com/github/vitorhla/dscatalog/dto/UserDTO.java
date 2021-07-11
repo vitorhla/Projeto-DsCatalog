@@ -22,7 +22,6 @@ public class UserDTO {
 	public UserDTO() {
 		
 	}
-
 	
 	
 	public UserDTO(Long id, String firstName, String lastName, String email) {
