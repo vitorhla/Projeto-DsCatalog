@@ -6,7 +6,7 @@ const  App = () => {
   return (
   <>
   <Navbar/>
-  <h1>Ola DSCatalog</h1>;
+  <h1>Ola DSCatalog</h1>
   </>
   );
 
